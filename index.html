@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YourBrandBuilders – Elevate Your Digital Presence</title>
+    <meta name="description" content="Transform your brand with stunning digital content, high-converting websites, and results-driven marketing strategies. Your one-stop solution for digital excellence.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="YourBrandBuilders – Digital Content & Marketing Excellence">
+    <meta property="og:description" content="Transform your brand with stunning digital content and marketing strategies">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="YourBrandBuilders – Digital Content & Marketing Excellence">
+    <meta name="twitter:description" content="Transform your brand with stunning digital content and marketing strategies">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/svgs/solid/rocket.svg">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Animation Libraries -->
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'gradient': 'gradient 8s linear infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        gradient: {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            },
+                        },
+                        glow: {
+                            '0%': { filter: 'brightness(100%)' },
+                            '100%': { filter: 'brightness(150%)' },
+                        },
+                    },
+                    backdropBlur: {
+                        xs: '2px',
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Styles */
+        .gradient-bg {
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #2563EB 100%);
+            background-size: 200% 200%;
+            animation: gradient 8s linear infinite;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .dark .glass {
+            background: rgba(17, 24, 39, 0.7);
+        }
+        
+        .nav-blur {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-blur.scrolled {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .dark .nav-blur.scrolled {
+            background: rgba(17, 24, 39, 0.8);
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Service Card Hover Effect */
+        .service-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .service-card-front,
+        .service-card-back {
+            transition: all 0.5s ease;
+        }
+        
+        .service-card:hover .service-card-front {
+            opacity: 0;
+            transform: translateY(-100%);
+        }
+        
+        .service-card:hover .service-card-back {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .service-card-back {
+            opacity: 0;
+            transform: translateY(100%);
+        }
+
+        /* Loading Button Animation */
+        .loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+    <!-- Navigation -->
+    <nav class="nav-blur fixed w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold text-white hover:text-blue-200 transition-all duration-300 font-poppins">
+                        YourBrandBuilders
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-white hover:text-blue-200 transition-colors duration-300">About</a>
+                    <a href="#services" class="text-white hover:text-blue-200 transition-colors duration-300">Services</a>
+                    <a href="#testimonials" class="text-white hover:text-blue-200 transition-colors duration-300">Testimonials</a>
+                    <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block text-yellow-400"></i>
+                    </button>
+                    <a href="#contact" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300">
+                        Get in Touch
+                    </a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button class="text-gray-600 hover:text-blue-600 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center gradient-bg overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div id="particles-bg" class="absolute inset-0"></div>
+        </div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 font-poppins" id="heroText">
+                    Elevate Your Brand with Stunning Digital Content & Marketing
+                </h1>
+                <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+                    We create engaging visuals, high-converting websites, and results-driven marketing strategies to help your business thrive.
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#contact" class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300 animate-float">
+                        Let's Build Your Brand
+                    </a>
+                    <a href="#services" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-all duration-300">
+                        Our Services
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 font-poppins">Why Choose Us?</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">Transforming visions into digital excellence</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Creative & Professional Designs -->
+                <div class="group">
+                    <div class="relative p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 hover:bg-gradient-to-br hover:from-blue-50 hover:to-purple-50 dark:hover:from-gray-800 dark:hover:to-gray-700">
+                        <div class="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-paint-brush text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4 text-center">Creative & Professional Designs</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-center">Custom branding and content that captures your unique identity and resonates with your audience.</p>
+                    </div>
+                </div>
+
+                <!-- Result-Driven Marketing -->
+                <div class="group">
+                    <div class="relative p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 hover:bg-gradient-to-br hover:from-blue-50 hover:to-purple-50 dark:hover:from-gray-800 dark:hover:to-gray-700">
+                        <div class="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-chart-line text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4 text-center">Result-Driven Marketing</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-center">Strategic campaigns that deliver measurable results and drive sustainable business growth.</p>
+                    </div>
+                </div>
+
+                <!-- Scalable & Affordable Solutions -->
+                <div class="group">
+                    <div class="relative p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 hover:bg-gradient-to-br hover:from-blue-50 hover:to-purple-50 dark:hover:from-gray-800 dark:hover:to-gray-700">
+                        <div class="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-rocket text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4 text-center">Scalable & Affordable Solutions</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-center">Flexible solutions that grow with your business, ensuring sustainable long-term success.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 font-poppins">Our Services</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">Comprehensive digital solutions for your brand</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Digital Content Creation -->
+                <div class="service-card group h-[400px] relative">
+                    <div class="service-card-front absolute inset-0 bg-white dark:bg-gray-700 rounded-xl shadow-lg p-8">
+                        <div class="h-full flex flex-col items-center justify-center">
+                            <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mb-6">
+                                <i class="fas fa-pencil-alt text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Digital Content Creation</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-center">Eye-catching posters, flyers, and infographics that tell your story.</p>
+                        </div>
+                    </div>
+                    <div class="service-card-back absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl shadow-lg p-8 text-white">
+                        <div class="h-full flex flex-col items-center justify-center">
+                            <h4 class="text-lg font-semibold mb-4">What We Offer:</h4>
+                            <ul class="space-y-2 text-center">
+                                <li>• Custom Graphics Design</li>
+                                <li>• Social Media Visuals</li>
+                                <li>• Brand Identity Design</li>
+                                <li>• Marketing Collateral</li>
+                            </ul>
+                            <button class="mt-6 px-6 py-2 bg-white text-blue-600 rounded-full hover:shadow-lg transition-shadow">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ad Designing -->
+                <div class="service-card group h-[400px] relative">
+                    <div class="service-card-front absolute inset-0 bg-white dark:bg-gray-700 rounded-xl shadow-lg p-8">
+                        <div class="h-full flex flex-col items-center justify-center">
+                            <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mb-6">
+                                <i class="fas fa-ad text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Ad Designing</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-center">Compelling ads for Google, Facebook, Instagram, and LinkedIn.</p>
+                        </div>
+                    </div>
+                    <div class="service-card-back absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl shadow-lg p-8 text-white">
+                        <div class="h-full flex flex-col items-center justify-center">
+                            <h4 class="text-lg font-semibold mb-4">Platform Expertise:</h4>
+                            <ul class="space-y-2 text-center">
+                                <li>• Google Display Ads</li>
+                                <li>• Social Media Ads</li>
+                                <li>• Remarketing Campaigns</li>
+                                <li>• A/B Testing</li>
+                            </ul>
+                            <button class="mt-6 px-6 py-2 bg-white text-blue-600 rounded-full hover:shadow-lg transition-shadow">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Website Development -->
+                <div class="service-card group h-[400px] relative">
+                    <div class="service-card-front absolute inset-0 bg-white dark:bg-gray-700 rounded-xl shadow-lg p-8">
+                        <div class="h-full flex flex-col items-center justify-center">
+                            <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mb-6">
+                                <i class="fas fa-code text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Website Development</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-center">Custom websites and landing pages that convert.</p>
+                        </div>
+                    </div>
+                    <div class="service-card-back absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl shadow-lg p-8 text-white">
+                        <div class="h-full flex flex-col items-center justify-center">
+                            <h4 class="text-lg font-semibold mb-4">Our Expertise:</h4>
+                            <ul class="space-y-2 text-center">
+                                <li>• Responsive Design</li>
+                                <li>• E-commerce Solutions</li>
+                                <li>• Landing Pages</li>
+                                <li>• SEO Optimization</li>
+                            </ul>
+                            <button class="mt-6 px-6 py-2 bg-white text-blue-600 rounded-full hover:shadow-lg transition-shadow">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Media Handling -->
+                <div class="service-card group h-[400px] relative">
+                    <div class="service-card-front absolute inset-0 bg-white dark:bg-gray-700 rounded-xl shadow-lg p-8">
+                        <div class="h-full flex flex-col items-center justify-center">
+                            <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mb-6">
+                                <i class="fas fa-share-alt text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Social Media Handling</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-center">Strategic content and growth management for social platforms.</p>
+                        </div>
+                    </div>
+                    <div class="service-card-back absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl shadow-lg p-8 text-white">
+                        <div class="h-full flex flex-col items-center justify-center">
+                            <h4 class="text-lg font-semibold mb-4">Services Include:</h4>
+                            <ul class="space-y-2 text-center">
+                                <li>• Content Strategy</li>
+                                <li>• Community Management</li>
+                                <li>• Analytics & Reporting</li>
+                                <li>• Engagement Growth</li>
+                            </ul>
+                            <button class="mt-6 px-6 py-2 bg-white text-blue-600 rounded-full hover:shadow-lg transition-shadow">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Branding & Digital Strategy -->
+                <div class="service-card group h-[400px] relative">
+                    <div class="service-card-front absolute inset-0 bg-white dark:bg-gray-700 rounded-xl shadow-lg p-8">
+                        <div class="h-full flex flex-col items-center justify-center">
+                            <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mb-6">
+                                <i class="fas fa-bullseye text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Branding & Digital Strategy</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-center">Comprehensive brand development and marketing strategies.</p>
+                        </div>
+                    </div>
+                    <div class="service-card-back absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl shadow-lg p-8 text-white">
+                        <div class="h-full flex flex-col items-center justify-center">
+                            <h4 class="text-lg font-semibold mb-4">Strategic Services:</h4>
+                            <ul class="space-y-2 text-center">
+                                <li>• Brand Identity</li>
+                                <li>• Market Research</li>
+                                <li>• Competitive Analysis</li>
+                                <li>• Growth Strategy</li>
+                            </ul>
+                            <button class="mt-6 px-6 py-2 bg-white text-blue-600 rounded-full hover:shadow-lg transition-shadow">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 font-poppins">What Our Clients Say</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400 mb-4">Trusted by 100+ businesses globally</p>
+            </div>
+
+            <div class="relative overflow-hidden">
+                <!-- Testimonials Container -->
+                <div id="testimonials-container" class="flex transition-transform duration-500 ease-in-out">
+                    <!-- Testimonial 1 -->
+                    <div class="w-full md:w-1/2 flex-shrink-0 px-4">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 h-full">
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center">
+                                    <i class="fas fa-user text-2xl text-white"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-xl font-semibold text-gray-900 dark:text-white">Sarah Johnson</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">CEO, TechStart</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-400 italic">"YourBrandBuilders transformed our digital presence completely. Their creative designs and marketing strategies helped us reach new heights in our business growth."</p>
+                            <div class="mt-4 flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="w-full md:w-1/2 flex-shrink-0 px-4">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 h-full">
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center">
+                                    <i class="fas fa-user text-2xl text-white"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-xl font-semibold text-gray-900 dark:text-white">Michael Chen</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">Marketing Director, InnovateX</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-400 italic">"The team's attention to detail and creative approach to content creation has helped us stand out in a competitive market. Highly recommended!"</p>
+                            <div class="mt-4 flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="w-full md:w-1/2 flex-shrink-0 px-4">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 h-full">
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center">
+                                    <i class="fas fa-user text-2xl text-white"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-xl font-semibold text-gray-900 dark:text-white">Emily Rodriguez</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">Founder, StyleCraft</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-400 italic">"Their social media management and content strategy have doubled our engagement rates. The ROI has been incredible!"</p>
+                            <div class="mt-4 flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Arrows -->
+                <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-800 rounded-full p-3 shadow-lg hover:scale-110 transition-transform z-10" onclick="moveTestimonials('prev')">
+                    <i class="fas fa-chevron-left text-blue-600 dark:text-white"></i>
+                </button>
+                <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-800 rounded-full p-3 shadow-lg hover:scale-110 transition-transform z-10" onclick="moveTestimonials('next')">
+                    <i class="fas fa-chevron-right text-blue-600 dark:text-white"></i>
+                </button>
+
+                <!-- Dots Indicator -->
+                <div class="flex justify-center mt-8 space-x-2">
+                    <button class="w-3 h-3 rounded-full bg-blue-600" onclick="goToTestimonial(0)"></button>
+                    <button class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700" onclick="goToTestimonial(1)"></button>
+                    <button class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-700" onclick="goToTestimonial(2)"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 font-poppins">Get in Touch</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">Let's discuss how we can help elevate your brand</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto">
+                <form id="contactForm" class="space-y-6" onsubmit="handleSubmit(event)">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
+                        <input type="text" id="name" name="name" required
+                            class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                            placeholder="Your Name">
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                        <input type="email" id="email" name="email" required
+                            class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                            placeholder="your@email.com">
+                    </div>
+
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
+                        <textarea id="message" name="message" rows="4" required
+                            class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
+                            placeholder="How can we help you?"></textarea>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit"
+                            class="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg transform hover:scale-105 transition-all duration-200">
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Brand Info -->
+                <div class="col-span-2 md:col-span-1">
+                    <h3 class="text-2xl font-bold mb-4 text-white">YourBrandBuilders</h3>
+                    <p class="text-gray-400 mb-4">Elevating brands through creative digital solutions.</p>
+                    <div class="space-y-2">
+                        <p class="flex items-center text-gray-400">
+                            <i class="fas fa-phone mr-2"></i>
+                            <a href="tel:6303945677" class="hover:text-white transition-colors">630-394-5677</a>
+                        </p>
+                        <p class="flex items-center text-gray-400">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <a href="mailto:info@yourbrandbuilders.com" class="hover:text-white transition-colors">info@yourbrandbuilders.com</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">About</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Digital Content</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Web Development</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Social Media</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Brand Strategy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Connect With Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transform hover:scale-110 transition-all">
+                            <i class="fab fa-instagram text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transform hover:scale-110 transition-all">
+                            <i class="fab fa-facebook text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transform hover:scale-110 transition-all">
+                            <i class="fab fa-linkedin text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transform hover:scale-110 transition-all">
+                            <i class="fab fa-twitter text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <p class="text-center text-gray-400">&copy; 2024 YourBrandBuilders. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
